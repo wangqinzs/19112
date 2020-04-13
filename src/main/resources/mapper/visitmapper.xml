@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.st.dao.VisitDao">
+<select id="getvisit" parameterType="java.util.Map"
+		resultType="com.st.bean.VisitBean">
+		select * from visit where visit_time like '%${checktext}%' 
+		 or visit_info like '%${checktext}%' 
+		  or visit_pattem like '%${checktext}%'
+		   or visit_pay like '%${checktext}%'
+		    or visit_money like '%${checktext}%'
+		   limit ${start},${limit}
+ 
+	</select>
+	<select id="getCount" parameterType="java.util.Map"
+		resultType="int">
+		select count(*) from visit where visit_time like '%${checktext}%' 
+		 or visit_info like '%${checktext}%' 
+		  or visit_pattem like '%${checktext}%'
+		   or visit_pay like '%${checktext}%'
+		    or visit_money like '%${checktext}%'
+		 
+
+	</select>
+	<delete id="deletevisit" parameterType="map">
+		delete from visit where  visit_id in (${ids})
+	</delete>
+	<update id="updatevisit" parameterType="map">
+		update visit set visit_time=#{visit_time},visit_info=#{visit_info},visit_pattem=#{visit_pattem}
+		,visit_pay=#{visit_pay},visit_money=#{visit_money}
+		where visit_id=#{visit_id}
+	</update>
+	<insert id="addvisit" parameterType="map">
+		<!-- SQL语句 -->
+		insert into visit (visit_id,visit_time,visit_info,visit_pattem,visit_pay,visit_money)  
+		 values (#{uuid},#{visit_time},#{visit_info},#{visit_pattem},#{visit_pay},#{visit_money})
+	</insert>
+	
+	
+	
+</mapper>

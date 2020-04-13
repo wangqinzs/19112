@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.st.dao.Bumendao">
+<select id="getbumen" parameterType="java.util.Map"
+		resultType="com.st.bean.Bumen">
+		select * from bumen where bmname like '%${checktext}%' 
+		 or manager like '%${checktext}%' 
+		   limit ${start},${limit}
+ 
+	</select>
+	<select id="getCount" parameterType="java.util.Map"
+		resultType="int">
+		select count(*) from bumen where bmname like '%${checktext}%' 
+		 or manager like '%${checktext}%' 
+		 
+
+	</select>
+<update id="Fenghao" parameterType="java.util.Map">
+		update bumen set state='1'  
+		 where bmid=#{bmid} 
+	</update>
+	<update id="Jiefeng" parameterType="java.util.Map">
+		update bumen set state='0'   
+		 where bmid=#{bmid} 
+	</update>	
+	<delete id="deletebumen" parameterType="map">
+		delete from bumen where state='1' and bmid in (${ids})
+	</delete>
+	<update id="updatebumen" parameterType="map">
+		update bumen set bmname=#{bmname},manager=#{manager}
+		where bmid=#{bmid}
+	</update>
+	<insert id="addbumen" parameterType="map">
+		<!-- SQL语句 -->
+		insert into bumen (bmid,bmname,manager)  
+		 values (#{uuid},#{bmname},#{manager})
+	</insert>
+	
+	
+</mapper>

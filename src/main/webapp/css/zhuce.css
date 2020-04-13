@@ -1,0 +1,86 @@
+.quanbu{
+	
+	width: 100%;
+	height: 2000px;
+	background-color: whitesmoke;
+}
+.zhuce_1{
+	width: 854px;
+	height: 534px;
+	background-color: white;
+	
+	margin: 0 auto;
+}
+.top{
+	width:786px ;
+	height: 44.7px;
+}
+
+
+.zi{
+	font-size: 30px;
+	padding-left: 340px; 
+	font-weight:400;
+
+}
+.zi1{
+	font-weight: 400;
+	width: 332px;
+	height: 25px;
+	margin: 0 auto;
+}
+.guojia{
+	
+	width:332px ;
+	height: 42px;
+	line-height: 40px;
+	border: 1px solid black;
+}
+.zi3{
+	position: relative;
+	top: 60px;
+	width: 332px;
+	height: 20px;
+	
+}
+.kuang{
+	width: 332px;
+	height: 246px;
+	margin: 0 auto;
+	
+	}
+	.zi4{
+		position: absolute;
+		top: 160px;
+	}
+.layui-input-block {
+		margin: 0 auto;
+		
+		} 
+		.zhuc{
+		position: absolute;
+		top: 200px;
+		}
+			.w{
+				width: 200px;
+			}
+			.c4{
+				position: absolute;
+				top: 248px;
+				
+			}
+			.w1{
+				width: 200px;
+			}
+		#test{
+		position:absolute;
+	
+	margin-left: 15%;
+		}	
+		.beijing1{
+		width:100%;
+		height:100%;
+		position: absolute;
+		}
+			
+			

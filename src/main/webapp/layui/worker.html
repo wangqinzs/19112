@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="css/layui.css"/>
+	</head>
+	<body>
+		<!-- 使用使用数据表格展示数据 -->
+		<table class="layui-table" lay-data="{url:'json/worker.json'}">
+			<thead>
+				<tr>
+					<th lay-data= "{'field':'name'}">姓名</th>
+					<th lay-data= "{'field':'sex'}">性别</th>
+					<th lay-data= "{'field':'age'}">年龄</th>
+					<th lay-data= "{'field':'height'}">身高</th>
+					<th lay-data= "{'field':'weight'}">体重</th>
+					
+				</tr>
+			</thead>
+			
+		</table>
+		<script src="layui.all.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+</html>

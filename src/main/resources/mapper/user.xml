@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.st.dao.UserDao">
+	<insert id="addbm" parameterType="map">
+		insert into bumen values (#{uuid},#{bmname})
+	</insert>
+
+
+	<select id="getuser" parameterType="string" resultMap="user_map">
+		select *
+		from user where username = #{username}
+
+	</select>
+	<resultMap type="com.st.bean.User" id="user_map">
+		<result column="userid" property="userid" />
+		<result column="username" property="username" />
+		<result column="userpass" property="userpass" />
+		<collection property="roles" select="user_role_list"
+			column="userid">
+
+		</collection>
+	</resultMap>
+	<select id="user_role_list" resultMap="role_map">
+		select b.* from user_roleo a left join role b on a.role_id=b.role_id where
+		a.userid = #{userid}
+	</select>
+	<resultMap type="com.st.bean.Role_Bean" id="role_map">
+		<result column="role_id" property="role_id" />
+		<result column="role_name" property="role_name" />
+
+		<collection property="permissions"
+			select="role_permission_list" column="role_id">
+
+		</collection>
+	</resultMap>
+	<select id="role_permission_list"
+		resultType="com.st.bean.Permission">
+		select b.* from roleo_perm a left join perm b on a.perm_id =b.perm_id
+		where a.role_id=#{role_id}
+	</select>
+	<select id="getUser" parameterType="java.util.Map"
+		resultType="com.st.bean.User">
+		select * from user where username like '%${checktext}%'
+		or userpass like '%${checktext}%'
+		or tel like '%${checktext}%'
+		or sex like '%${checktext}%'
+		or position like '%${checktext}%' order by createtime
+		limit ${start},${limit}
+
+	</select>
+	<select id="getCount" parameterType="java.util.Map"
+		resultType="int">
+		select count(*) from user where username like
+		'%${checktext}%'
+		or userpass like '%${checktext}%'
+		or tel like '%${checktext}%'
+		or sex like '%${checktext}%'
+		or position like '%${checktext}%'
+
+	</select>
+	<update id="Fenghao" parameterType="java.util.Map">
+		update user set state='1'
+		where userid=#{userid}
+	</update>
+	<update id="Jiefeng" parameterType="java.util.Map">
+		update user set state='0'
+		where userid=#{userid}
+	</update>
+
+	<delete id="deleteUser" parameterType="map">
+		delete from user where
+		state='1' and userid in (${ids})
+	</delete>
+	<update id="updateUser" parameterType="map">
+		update user set
+		username=#{username},sex=#{sex},tel=#{tel},userpass=#{userpass},position=#{position}
+		where userid=#{userid}
+	</update>
+	<insert id="addUser" parameterType="java.util.Map">
+		<!-- SQL语句 -->
+		insert into user (userid,username,userpass,tel,sex,birthday,position)
+		values
+		(#{uuid},#{username},#{userpass},#{tel},#{sex},#{birthday},#{position})
+	</insert>
+</mapper>

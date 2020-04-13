@@ -1,0 +1,57 @@
+.div_top>img{
+	width:100px;
+	hight:100px;
+	position:absolute;
+	left:300px;
+}
+.div_h{
+	top:30px;
+	position:absolute;
+	left: 450px;
+	
+	font-size: 20px;
+}
+.div_top{
+	width:100%;
+	height:120px;
+}
+.div_zhong{
+	
+	width:100%;
+	height:700px;
+	background-color: #F4F4F4;
+}
+.div_t{
+	width:500px;
+	height:300px;
+	position:absolute;
+	left:300px;
+	top:200px;
+	
+}
+.div_t>img{
+	width:500px;
+	height:300px;
+	
+}
+.div_p{
+	position: absolute;
+	left:900px;
+	top:250px;
+	font-size: 36px;
+	color: #b0b0b0;
+	
+}
+.div_a{
+		position: absolute;
+		left:20px
+
+}
+.beijing_h{
+	width:800px;
+	height:100%;
+	background-color: #c0c0c0;
+	
+}
+    
+	

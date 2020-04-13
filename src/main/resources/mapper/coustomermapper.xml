@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.st.dao.CoustomerDao">
+<select id="getcoustomer" parameterType="java.util.Map"
+		resultType="com.st.bean.CoustomerBean">
+		select * from coustomer where coustomer_name like '%${checktext}%' 
+		 
+		  or coustomer_man like '%${checktext}%' 
+		   or coustomer_tel like '%${checktext}%' 
+		    or coustomer_email like '%${checktext}%' 
+		     or coustomer_addr like '%${checktext}%' 
+		      or coustomer_public like '%${checktext}%' 
+		       or coustomer_grade like '%${checktext}%' 
+		        or coustomer_user like '%${checktext}%' order by create_time
+		        
+		   limit ${start},${limit}
+ 
+	</select>
+	<select
+ id="getCount" parameterType="java.util.Map"
+		resultType="int">
+		select count(*) from coustomer where coustomer_name like '%${checktext}%' 
+		
+		  or coustomer_man like '%${checktext}%' 
+		   or coustomer_tel like '%${checktext}%' 
+		    or coustomer_email like '%${checktext}%' 
+		     or coustomer_addr like '%${checktext}%' 
+		      or coustomer_public like '%${checktext}%' 
+		       or coustomer_grade like '%${checktext}%' 
+		        or coustomer_user like '%${checktext}%' 
+		 
+
+	</select>
+<update id="Fenghao" parameterType="java.util.Map">
+		update coustomer set state='1'  
+		 where coustomer=#{coustomer} 
+	</update>
+	<update id="Jiefeng" parameterType="java.util.Map">
+		update coustomer set state='0'   
+		 where coustomer=#{coustomer} 
+	</update>	
+	<delete id="deletecoustomer" parameterType="map">
+		delete from coustomer where state='1' and coustomer_id in (${ids})
+	</delete>
+	<update id="updatecoustomer" parameterType="map">
+		update coustomer set coustomer_name=#{coustomer_name},coustomer_man=#{coustomer_man}
+		,coustomer_tel=#{coustomer_tel},coustomer_email=#{coustomer_email},coustomer_addr=#{coustomer_addr}
+		,coustomer_grade=#{coustomer_grade},coustomer_user=#{coustomer_user}
+		where coustomer_id=#{coustomer_id}
+	</update>
+	<insert id="addcoustomer" parameterType="map">
+		<!-- SQL语句 -->
+		insert into coustomer (coustomer_id,coustomer_name,coustomer_man,coustomer_tel,coustomer_email,coustomer_addr,coustomer_grade,coustomer_user)  
+		 values (#{uuid},#{coustomer_name},#{coustomer_man},#{coustomer_tel},#{coustomer_email},#{coustomer_addr},#{coustomer_grade},#{coustomer_user})
+	</insert>
+<!-- 查找公海客户 -->
+<select id="getcoustomerpublic" parameterType="java.util.Map"
+		resultType="com.st.bean.CoustomerBean">
+		select * from coustomer where state=#{state} and  coustomer_public=#{public} and (coustomer_name like '%${checktext}%' 
+		 
+		  or coustomer_man like '%${checktext}%' 
+		   or coustomer_tel like '%${checktext}%' 
+		    or coustomer_email like '%${checktext}%' 
+		     or coustomer_addr like '%${checktext}%' 
+		      
+		       or coustomer_grade like '%${checktext}%' 
+		        or coustomer_user like '%${checktext}%' )order by create_time
+		        
+		   limit ${start},${limit}
+ 
+	</select>
+	<!-- 查找公海客户数量 -->
+	<select
+ id="getCountpublic" parameterType="java.util.Map"
+		resultType="int">
+		select count(*) from coustomer where state=#{state} and coustomer_public=#{public} and (coustomer_name like '%${checktext}%' 
+		
+		  or coustomer_man like '%${checktext}%' 
+		   or coustomer_tel like '%${checktext}%' 
+		    or coustomer_email like '%${checktext}%' 
+		     or coustomer_addr like '%${checktext}%' 
+		     
+		       or coustomer_grade like '%${checktext}%' 
+		        or coustomer_user like '%${checktext}%' )
+		 
+
+	</select>
+<update id="coutomer_private" parameterType="map">
+		update coustomer set  coustomer_public=#{public},coustomer_user=#{userid}
+		where coustomer_id=#{coustomer_id}
+	</update>
+	
+	<!-- 查找跟单客户 -->
+<select id="getcoustomerprivate" parameterType="java.util.Map"
+		resultType="com.st.bean.CoustomerBean">
+		select * from coustomer where state=#{state} and coustomer_public=#{public} and coustomer_user=#{userid} and (coustomer_name like '%${checktext}%' 
+		 
+		  or coustomer_man like '%${checktext}%' 
+		   or coustomer_tel like '%${checktext}%' 
+		    or coustomer_email like '%${checktext}%' 
+		     or coustomer_addr like '%${checktext}%' 
+		      
+		       or coustomer_grade like '%${checktext}%' 
+		       ) order by create_time
+		        
+		   limit ${start},${limit}
+ 
+	</select>
+	<!-- 查找跟单客户数量 -->
+	<select
+ id="getCountprivate" parameterType="java.util.Map"
+		resultType="int">
+		select count(*) from coustomer where state=#{state} and coustomer_public=#{public} and coustomer_user=#{userid} and (coustomer_name like '%${checktext}%' 
+		
+		  or coustomer_man like '%${checktext}%' 
+		   or coustomer_tel like '%${checktext}%' 
+		    or coustomer_email like '%${checktext}%' 
+		     or coustomer_addr like '%${checktext}%' 
+		     
+		       or coustomer_grade like '%${checktext}%' 
+		     )
+		 
+
+	</select>
+	
+	<update id="delprivate" parameterType="map">
+		update coustomer set  coustomer_public=#{public},state=#{state}
+		where coustomer_id=#{coustomer_id}
+	</update>
+	
+	<!-- 查找我的客户 -->
+	<select id="getmycoustomer" parameterType="java.util.Map"
+		resultType="com.st.bean.CoustomerBean">
+		select * from coustomer where state=#{state} and coustomer_public=#{public} and coustomer_user=#{userid} and (coustomer_name like '%${checktext}%' 
+		 
+		  or coustomer_man like '%${checktext}%' 
+		   or coustomer_tel like '%${checktext}%' 
+		    or coustomer_email like '%${checktext}%' 
+		     or coustomer_addr like '%${checktext}%' 
+		      
+		       or coustomer_grade like '%${checktext}%' 
+		       ) order by create_time
+		        
+		   limit ${start},${limit}
+ 
+	</select>
+
+	<select
+ id="getmyCount" parameterType="java.util.Map"
+		resultType="int">
+		select count(*) from coustomer where state=#{state} and coustomer_public=#{public} and coustomer_user=#{userid} and (coustomer_name like '%${checktext}%' 
+		
+		  or coustomer_man like '%${checktext}%' 
+		   or coustomer_tel like '%${checktext}%' 
+		    or coustomer_email like '%${checktext}%' 
+		     or coustomer_addr like '%${checktext}%' 
+		     
+		       or coustomer_grade like '%${checktext}%' 
+		     )
+		 
+
+	</select>
+	
+</mapper>

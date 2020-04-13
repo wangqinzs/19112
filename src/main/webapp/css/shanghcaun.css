@@ -1,0 +1,22 @@
+.imgDiv{
+	margin: 0 auto;
+	display:inline-block;
+	position: relative;
+	height: 80px;
+}
+
+.img_delete_icon{
+	font-size: 20px; 
+color: #fff;
+	position: absolute;
+	right:0px; 
+	margin-top: 0;
+	
+}
+.img_delete_icon:hover{
+ color:red;
+}
+.img_delete_icon:link{
+ color: #fff;
+}
+

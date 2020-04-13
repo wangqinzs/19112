@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <!--  -->
+  
+  
+<mapper namespace="com.st.dao.Role_Dao">
+<resultMap type="com.st.bean.TreeBean" id="treebean">
+<result column="parent_id" property="id"/>
+<result column="parent_name" property="title"/>
+<collection property="children" ofType="com.st.bean.TreeBean">
+<result column="perm_id" property="id"/>
+<result column="perm_name" property="title"/>
+</collection>
+</resultMap>
+ <select id="treejson" resultMap="treebean">
+ select a.perm_id as parent_id,a.perm_name as parent_name,
+ b.perm_id ,b.perm_name from perm a LEFT JOIN perm b ON 
+ a.perm_id=b.parent_id WHERE a.parent_id ='0'
+ </select>
+	
+	<insert id="role_perm" parameterType="map">
+    insert into roleo_perm
+    (   
+    role_id,
+       perm_id
+    )
+    values
+    <foreach collection="perms" item="item" index= "index" separator =",">
+    ( #{item.role_id},#{item.perm})
+    </foreach>
+
+</insert>
+ <select id="getRole" parameterType="java.util.Map"
+		resultType="com.st.bean.Role_Bean">
+		select * from role where role_name like '%${checktext}%' 
+		 or role_code like '%${checktext}%' 
+		   limit ${start},${limit}
+ 
+	</select>
+	<select id="getCount" parameterType="java.util.Map"
+		resultType="int">
+		select count(*) from role where role_name like '%${checktext}%' 
+		 or role_code like '%${checktext}%' 
+		 
+
+	</select>
+
+	<update id="Fenghao" parameterType="java.util.Map">
+		update role set state='1'  
+		 where role_id=#{role_id} 
+	</update>
+	<update id="Jiefeng" parameterType="java.util.Map">
+		update role set state='0'   
+		 where role_id=#{role_id} 
+	</update>	
+	<delete id="deleterole" parameterType="map">
+		delete from role where  role_id in (${ids})
+	</delete>
+	<update id="updaterole" parameterType="map">
+		update role set role_name=#{role_name},role_code=#{role_code}
+		where role_id=#{role_id}
+	</update>
+	<insert id="addrole" parameterType="map">
+		<!-- SQL语句 -->
+		insert into role (role_id,role_name,role_code)  
+		 values (#{uuid},#{role_name},#{role_code})
+	</insert>
+	</mapper>
